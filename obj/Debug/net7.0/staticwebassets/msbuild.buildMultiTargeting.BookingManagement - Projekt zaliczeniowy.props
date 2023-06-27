@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\BookingManagement - Projekt zaliczeniowy.props" />
+</Project>

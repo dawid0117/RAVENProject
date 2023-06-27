@@ -1,0 +1,43 @@
+﻿@model Room
+
+@{
+    @if (User.Identity.IsAuthenticated)
+    {
+        @if (Model != null)
+        {
+            ViewData["Title"] = "Rezerwacja pokoju";
+            <div class="d-flex justify-content-center">
+                <div class="card m-3 p-2" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Name</h5>
+                    <p class="card-text">@Model.Description</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Powierzchnia: @Model.Space m2</li>
+                    <li class="list-group-item">Liczba osób: @Model.People</li>
+                    <li class="list-group-item">@Model.HotelId</li>
+                </ul> 
+            </div>
+        </div>
+        }
+
+        @if (TempData["isReserved"] == null)
+        await Html.RenderPartialAsync("../Guest/Index.cshtml", new Guest());
+
+    @if (TempData["isReserved"] != null )
+    {
+        Reservation reservation = new Reservation()
+        {
+            RoomId = Model.Id,
+            Email = User.Identity.Name
+        };
+        await Html.RenderPartialAsync("../Reservation/Index.cshtml", reservation);
+    }
+
+    }
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div style="font-size: 25px;"><a style="text-decoration:none; font-size: 25px;" asp-area="Identity" asp-page="/Account/Login">Zaloguj się</a> aby zarezerwować pokój!</div>
+    }
+
+}

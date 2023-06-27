@@ -1,0 +1,43 @@
+﻿@model Reservation
+
+@{
+    ViewData["Title"] = "Twoje rezerwacje";
+    int i = 1; 
+    @if (ViewBag.Reservations != null)
+    {
+        <table class="table m-3">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Rezerwacji</th>
+                    <th scope="col">Zameldowanie</th>
+                    <th scope="col">Wymeldowanie</th>
+                    @if(User.IsInRole("Admin")){
+                    <th scope="col">Edycja</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var reservation in ViewBag.Reservations)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@reservation.Id</td>
+                        <td>@reservation.begin</td>
+                        <td>@reservation.end</td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a class="btn btn-danger" asp-controller="Reservation" asp-action="Delete" asp-route-id="@reservation.Id">Usuń</a>
+                                <a class="btn btn-primary" asp-controller="Reservation" asp-action="Edit" asp-route-id="@reservation.Id">Edytuj</a>
+                            </td>
+                        }
+                    </tr>
+                    i++;
+                }
+        </tbody>
+    </table>
+    }
+}
+

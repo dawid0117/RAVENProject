@@ -1,0 +1,25 @@
+﻿@model Reservation
+
+@{
+    DateTime now = DateTime.Now;
+    DateTime after = DateTime.Now.AddDays(1);
+    <form asp-action="Index" asp-controller="Reservation" method="post">
+        <h2 class="mb-4">Rezerwacja</h2>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+            <input asp-for="Email" type="text" value="@Model.Email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        
+            <input asp-for="RoomId" value="@Model.RoomId" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" hidden>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Zameldowanie</span>
+            <input asp-for="begin" type="datetime-local" value="@now" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Wymeldowanie</span>
+            <input asp-for="end" type="datetime-local" value="@after" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <button type="submit" class="btn btn-secondary">Zarezerwuj</button>
+    </form>
+}

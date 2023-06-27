@@ -1,0 +1,67 @@
+﻿@model Room
+
+@{
+    ViewData["Title"] = "Strona Główna";
+    int i = 0;
+    int rooms = 1;
+    <h3 class="mb-3">Filtruj</h3>
+    <div class="input-group mb-3">
+        <form method="get" asp-action="Index">
+            <div class="input-group mb-2">
+                <label class="input-group-text" for="inputGroupSelect01">Liczba osób</label>
+                <input asp-for="People" type="number" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Nazwa</label>
+                <input asp-for="Name" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            </div>
+            <select class="form-select mb-3" aria-label="Default select example" asp-for="HotelId">
+                <option selected>Wybierz hotel</option>
+                @foreach (var hotel in ViewBag.Hotels)
+                {
+                    <option value="@hotel.Id">@hotel.Name</option>
+                }
+            </select>
+            <button type="submit" class="btn btn-secondary" id="filterstuff">Flitruj</button>
+        </form>
+        </div>
+    <h3 class="mb-3">Lista pokoi</h3>
+    <div class="d-flex justify-content-center flex-sm-wrap flex-wrap">
+        @if (ViewBag.Rooms != null)
+            @foreach (var room in ViewBag.Rooms)
+            {
+                <div class="card m-3 p-2" style="width: 20rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@room.Name</h5>
+                        <p class="card-text">@room.Description</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Powierzchnia: @room.Space m2</li>
+                        <li class="list-group-item">Liczba osób: @room.People</li>
+                        <li class="list-group-item">@room.HotelId</li>
+                    </ul>
+                    <div class="card-body d-flex align-items-center">
+                        <a asp-action="Reservation" asp-route-id="@room.Id" class="btn btn-secondary card-link d-flex justify-content-center">Rezerwuj</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@room.Id" class="btn btn-danger card-link d-flex justify-content-center align-content-center">Usuń</a>
+                            <a asp-action="Edit" asp-route-id="@room.Id" class="btn btn-primary card-link d-flex justify-content-center align-content-center flex-wrap">Edytuj</a>
+                        }
+                    </div>
+                </div>
+                rooms++;
+            }
+        @if (ViewBag.Rooms == null)
+        {
+            <h2>Brak pokoi</h2>
+        }
+    </div>
+
+    <div>
+        @for(int k = 0; k < Math.Ceiling((decimal) rooms/6); k++)
+    {
+        <a style="font-size: 20px;"value="@(k+1)" type="button" asp-action="Index" asp-route-id="@(k+1)">@(k+1)</a>
+    }
+    </div>
+}
+

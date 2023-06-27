@@ -1,0 +1,75 @@
+﻿@model Hotel
+
+@{
+    ViewData["Title"] = "Dodaj hotel";
+
+    int i = 1;
+    @if (TempData["Edit"] == null)
+    {
+        <form asp-action="Add" method="post">
+            <h2 class="mb-4">Dodaj hotel</h2>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Nazwa</span>
+                <input asp-for="Name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Ulica</span>
+                <input asp-for="Street" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Śr. Ocena</span>
+                <input asp-for="AvgMark" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Dodaj</button>
+    </form>
+    }
+    @if(TempData["Edit"] != null)
+    {
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            <h2 class="mb-4">Edytuj hotel @Model.Name</h2>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Nazwa</span>
+            <input asp-for="Name" type="text" value = "@Model.Name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Ulica</span>
+                <input asp-for="Street" type="text" value="@Model.Street" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Śr. Ocena</span>
+                <input asp-for="AvgMark" type="number" value="@Model.AvgMark" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Zaktualizuj</button>
+    </form>
+    }
+
+
+    <table class="table m-3">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Ulica</th>
+                <th scope="col">Ocena</th>
+                <th scope="col">Edytuj hotel</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.Hotels != null) 
+            foreach (var hotel in ViewBag.Hotels)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@hotel.Name</td>
+                        <td>@hotel.Street</td>
+                        <td>@hotel.AvgMark</td>
+                        <td>
+                            <a class="btn btn-danger" asp-controller="Hotel" asp-action="Delete" asp-route-id="@hotel.Id">Usuń</a>
+                            <a class="btn btn-primary" asp-controller="Hotel" asp-action="EditHotel" asp-route-id="@hotel.Id">Edytuj</a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+        </tbody>
+    </table>
+}

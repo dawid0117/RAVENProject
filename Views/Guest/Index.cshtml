@@ -1,0 +1,59 @@
+﻿@model Guest
+
+@{
+    @if (TempData["View"] == null)
+    {
+        <form asp-action="Index" asp-controller="Guest" method="post" class="w-50">
+            <h2 class="mb-4">Podaj swoje dane</h2>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Imie</span>
+            <input asp-for="Name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Nazwisko</span>
+            <input asp-for="Surname" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+            <input asp-for="Email" type="email" value="@User.Identity.Name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Wiek</span>
+            <input asp-for="Age" type="number" value="" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Nr. tel</span>
+            <input asp-for="PhoneNumber" type="tel" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Potwierdź dane</button>
+    </form>
+    }
+    @if(TempData["View"] != null)
+    {
+        <form class="w-50">
+            <h2 class="mb-4">Twoje dane/h2>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Imie</span>
+                <input asp-for="Name" type="text" value="@Model.Name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Nazwisko</span>
+                <input asp-for="Surname" type="text" value="@Model.Surname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+            </div>
+            <div class="input-group mb-3">
+                 <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                 <input asp-for="Email" type="email" value="@User.Identity.Name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+             </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Wiek</span>
+                <input asp-for="Age" type="number" value="@Model.Age" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Nr. tel</span>
+                <input asp-for="PhoneNumber" type="tel" value="@Model.PhoneNumber" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+            </div>
+        </form>
+    }
+}

@@ -1,0 +1,10 @@
+﻿@model Room
+
+@{
+    ViewData["Title"] = "Niepowodzenie";
+
+    <div class="alert alert-danger" role="alert">
+        Pokój jest aktualnie zarezerwowany w tych godzinach podaj inne daty!
+    </div>
+    <a style="text-decoration:none; font-size:25px; font-weight:bold;" asp-controller="Room" asp-action="Index">Powrót na strone główną</a>
+}
