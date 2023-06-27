@@ -52,7 +52,7 @@ namespace BookingManagement___Projekt_zaliczeniowy.Controllers
                 session.Delete(reservation);
                 session.SaveChanges();
             }
-            return RedirectToAction("ListReservations", "Guest");
+            return RedirectToAction("ListReservationsAdmin", "Guest");
         }
 
         public IActionResult Edit(string id) 

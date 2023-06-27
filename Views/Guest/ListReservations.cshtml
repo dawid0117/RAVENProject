@@ -12,7 +12,6 @@
                     <th scope="col">ID Rezerwacji</th>
                     <th scope="col">Zameldowanie</th>
                     <th scope="col">Wymeldowanie</th>
-                    <th scope="col">Edycja</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,10 +23,6 @@
                         <td>@reservation.Id</td>
                         <td>@reservation.begin</td>
                         <td>@reservation.end</td>
-                            <td>
-                                <a class="btn btn-danger" asp-controller="Reservation" asp-action="Delete" asp-route-id="@reservation.Id">Usuń</a>
-                                <a class="btn btn-primary" asp-controller="Reservation" asp-action="Edit" asp-route-id="@reservation.Id">Edytuj</a>
-                            </td>
                     </tr>
                     i++;
                 }
