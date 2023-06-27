@@ -3,6 +3,13 @@
 @{
     ViewData["Title"] = "Twoje rezerwacje";
     int i = 1;
+
+    <div>
+        <a type="button" class="btn btn-primary" asp-action="Sort" asp-controller="Reservation" asp-route-id="ByBegin">Sortuj po zameldowaniu</a>
+        <a type="button" class="btn btn-primary" asp-action="Sort" asp-controller="Reservation" asp-route-id="ByEnd">Sortuj po wymeldowaniu</a>
+        <a type="button" class="btn btn-primary" asp-action="Sort" asp-controller="Reservation" asp-route-id="ByReser">Sortuj po emailu</a>
+    </div>
+
     @if (ViewBag.Reservations != null)
     {
         <table class="table m-3">

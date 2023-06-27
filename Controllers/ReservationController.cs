@@ -83,5 +83,10 @@ namespace BookingManagement___Projekt_zaliczeniowy.Controllers
             return RedirectToAction("Reservation", "Room", new { error = "error" });
         }
 
+        public IActionResult Sort(string id)
+        {
+            var sortby = id;
+            return RedirectToAction("ListReservationsAdmin", "Guest", new { Sort = sortby });    
+        }
     }
 }

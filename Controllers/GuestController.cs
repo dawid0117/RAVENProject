@@ -56,7 +56,7 @@ namespace BookingManagement___Projekt_zaliczeniowy.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListReservationsAdmin()
+        public IActionResult ListReservationsAdmin(string Sort)
         {
             List<Reservation> reservations;
             using (var session = Session.Store.OpenSession())
@@ -65,6 +65,12 @@ namespace BookingManagement___Projekt_zaliczeniowy.Controllers
                     .ToList();
 
             }
+            if (Sort == "ByBegin")
+                reservations = reservations.OrderBy(x => x.begin).ToList();
+            else if(Sort == "ByEnd")
+                reservations = reservations.OrderBy(x => x.end).ToList();
+            else if(Sort == "ByReser")
+                reservations = reservations.OrderBy(x => x.Email).ToList();
             ViewBag.Reservations = reservations;
             return View();
         }
