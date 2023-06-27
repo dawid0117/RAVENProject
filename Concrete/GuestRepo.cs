@@ -136,5 +136,23 @@ namespace BookingManagement___Projekt_zaliczeniowy.Concrete
             }
         }
 
+        public bool DeleteReservation(string id)
+        {
+            using(var session = Session.Store.OpenSession())
+            {
+                try
+                {
+                    var reservation = session.Load<Reservation>(id);
+                    session.Delete(reservation);
+                    session.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 }

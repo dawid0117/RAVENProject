@@ -116,6 +116,11 @@ namespace BookingManagement___Projekt_zaliczeniowy.Controllers
                     hotel.Rooms.Remove(id);
                     session.SaveChanges();
                 }
+                var reservations = session.Query<Reservation>().Where(x => x.RoomId == id).ToList();
+                foreach(var reservation in reservations)
+                {
+                    _guest.DeleteReservation(reservation.Id);
+                }
             }
             _room.RemoveRoom(id);
             return RedirectToAction("Index", "Room");

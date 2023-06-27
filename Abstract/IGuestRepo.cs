@@ -11,5 +11,6 @@ namespace BookingManagement___Projekt_zaliczeniowy.Abstract
         Guest getGuestById(string guestId);
         Guest getByName(string identityName);
         bool IsReservedAtTime(string roomId,DateTime begin, DateTime end, Reservation resr = null);
+        bool DeleteReservation(string id);
     }
 }

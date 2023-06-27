@@ -54,5 +54,19 @@ namespace BookingManagement___Projekt_zaliczeniowy.Controllers
             ViewBag.Reservations = reservations;
             return View();
         }
+
+        [HttpGet]
+        public IActionResult ListReservationsAdmin()
+        {
+            List<Reservation> reservations;
+            using (var session = Session.Store.OpenSession())
+            {
+                reservations = session.Query<Reservation>()
+                    .ToList();
+
+            }
+            ViewBag.Reservations = reservations;
+            return View();
+        }
     }
 }
